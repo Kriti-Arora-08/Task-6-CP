@@ -1,0 +1,14 @@
+\documentclass[12pt]{article}
+\begin{document}
+\section*{Editorial}
+First after accepting values, we calculate gcd of mm, hh, ss by a recursive algorithm\\
+First we calculate gcd of hh and mm and store it in gcd1, next gcd of gcd1 and ss\\
+Time complexity for gcd (int a, int b): O( log(a)) where a is minimum of a and b\\
+Now we update wing[x] for each wing x with position of the person of that wing (first position in the that array taken as 0)\\
+Now we are repeatedly checking how many people are to be removed for each case of each wing and this is calculated by taking the difference of the positions of two people from the same wing and then subtracting the number of people of that wing between those two people from that value. \\
+Now if this value is less than or equal to the maximum number of people that can be removed, then we are updating this value for the maximum possible answer\\
+Time complexity for this calculation: O(log (n))
+
+
+
+\end{document}
