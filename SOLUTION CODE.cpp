@@ -1,0 +1,59 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int gcd(int x,int y) // to calulate gcd of two numbers
+{
+    if(x==0||y==0)
+    return 1;
+    if(x%y==0)
+    return y;
+    x=x%y;
+    return gcd(y,x);
+}
+
+int find_maximum()
+{
+    int n,w,x,hh,mm,ss;
+    cin >> n >> w;
+    cin>> hh>> mm>> ss;
+    int gcd1; 
+    if( hh > mm)
+    gcd1=gcd( hh , mm); //gcd of hh and mm then gcd of gcd1 and ss
+    else
+    gcd1=gcd( mm, hh); 
+    if(gcd1>ss)
+    x=gcd( gcd1 ,ss);
+    else
+    x=gcd(ss,gcd1);
+    vector <vector<int>> wings(w+1); //to store position of the person of each wing in that wing[<wing number>]
+    for(int i = 0; i < n; i++){
+        int wing_number;
+        cin >> wing_number;
+        wings[wing_number].push_back(i); // updating the position of each person of a wing in his particular wing
+    }
+    int max_possible = 0;
+    for(int i = 1; i <= w; i++){ // checking all the cases for every wing to find the maximum possible wingies together
+        int j = 0, k = 0;
+        while(k < wings[i].size()){
+            if(wings[i][k]-wings[i][j]+1 - (k-j+1) <= x){ // here wings[i][k]-wings[i][j]+1 is the difference of the positions of two people from the same wing and (k-j+1) is the the number of people of that wing between those two people from that value and updating this value if it is less than the maximum number of people to be removed
+               if(max_possible < (k-j+1))
+                max_possible = k-j+1;
+                k++;
+            }
+            else{
+                j++;
+            }   
+        }
+    }    
+    cout << max_possible << endl;
+}
+
+int main(){
+    int t ;
+    cin >> t;
+
+    while(t--){
+        find_maximum();
+    }
+}
